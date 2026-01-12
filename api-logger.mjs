@@ -95,6 +95,7 @@ async function insertApiLog(logData) {
     logData.userAgent,
   ];
   
+  console.log(pool.connectionString);
   await pool.query(query, values);
 }
 
