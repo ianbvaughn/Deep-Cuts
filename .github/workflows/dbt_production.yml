@@ -63,7 +63,7 @@ jobs:
       
       - name: Upload dbt logs
         if: always()  # Upload logs even if previous steps fail
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dbt-logs
           path: logs/

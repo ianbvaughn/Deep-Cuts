@@ -1,6 +1,7 @@
 spotify_dbt:
+  target: prod
   outputs:
-    dev:
+    prod:
       type: postgres
       dbname: "{{ env_var('DBT_POSTGRES_DBNAME') }}"
       schema: dbt
@@ -9,4 +10,3 @@ spotify_dbt:
       port: "{{ env_var('DBT_POSTGRES_PORT') }}"
       threads: 1
       user: "{{ env_var('DBT_POSTGRES_USER') }}"
-  target: dev
