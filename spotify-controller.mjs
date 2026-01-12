@@ -1,11 +1,13 @@
 import 'dotenv/config';
 import express from 'express';
+import cors from 'cors';
 import { apiLogger } from './api-logger.mjs';
 import * as spotify from './spotify-model.mjs';
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use(cors());
 app.use(apiLogger);
 
 const clientId = process.env.CLIENT_ID;
