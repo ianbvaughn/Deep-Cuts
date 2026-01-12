@@ -15,6 +15,8 @@ function App() {
   const [selectedAlbum, setSelectedAlbum] = useState([]);
   const [tracks, setTracks] = useState([]);
 
+  const API_URL = process.env.VITE_API_BASE_URL;
+
   const search = async(e) => {
 
     e.preventDefault();
@@ -23,7 +25,7 @@ function App() {
     setAlbums([]);
     setTracks([]);
     const response = await fetch(
-      `/spotify/artist/${artistName}`,
+      `${API_URL}/spotify/artist/${artistName}`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
@@ -40,7 +42,7 @@ function App() {
     setTracks([]);
     setSelectedAlbum([]);
     const response = await fetch(
-      `/spotify/albums/${selectedArtist.id}`,
+      `${API_URL}/spotify/albums/${selectedArtist.id}`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
@@ -54,7 +56,7 @@ function App() {
   const getTracks = async() => {
     
     const response = await fetch(
-      `/spotify/tracks/${selectedAlbum.id}`,
+      `${API_URL}/spotify/tracks/${selectedAlbum.id}`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}

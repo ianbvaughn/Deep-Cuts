@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 function Track({track}) {
 
     const [popularity, setPopularity] = useState(0);
+    const API_URL = process.env.VITE_API_BASE_URL;
 
     const getPopularity = async() => {
         const response = await fetch(
-        `/spotify/track/${track.id}`,
+        `${API_URL}/spotify/track/${track.id}`,
         {
             method: 'GET',
             headers: {'Content-Type': 'application/json'}
