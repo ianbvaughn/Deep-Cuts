@@ -35,12 +35,16 @@ jobs:
         run: dbt --version
       
       - name: Install dbt packages
-        run: dbt deps
+        run: |
+          cd spotify_dbt
+          dbt deps
         env:
           DBT_PROFILES_DIR: .
       
       - name: Run dbt models
-        run: dbt run --target prod
+        run: |
+          cd spotify_dbt
+          dbt run --target prod
         env:
           DBT_PROFILES_DIR: .
           DBT_POSTGRES_HOST: ${{ secrets.HOST }}
@@ -50,7 +54,9 @@ jobs:
           DBT_POSTGRES_DBNAME: ${{ secrets.DBNAME }}
       
       - name: Run dbt tests
-        run: dbt test --target prod
+        run: |
+          cd spotify_dbt
+          dbt test --target prod
         env:
           DBT_PROFILES_DIR: .
           DBT_POSTGRES_HOST: ${{ secrets.HOST }}
