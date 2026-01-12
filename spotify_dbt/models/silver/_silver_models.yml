@@ -1,0 +1,13 @@
+models:
+  - name: silver_api_logs
+    description: "Cleans up bronze logs, removing nulls and adding identifiers for some fields."
+    columns:
+      - name: log_id
+      - name: timestamp
+      - name: user_id
+      - name: endpoint
+      - name: http_method
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['GET','POST']

@@ -1,0 +1,9 @@
+sources:
+  - name: bronze_tables
+    schema: bronze
+    tables:
+      - name: bronze_api_logs
+        config:
+          freshness:
+            warn_after: {count: 24, period: hour}
+          loaded_at_field: ingested_at
