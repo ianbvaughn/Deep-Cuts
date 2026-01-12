@@ -15,7 +15,7 @@ function App() {
   const [selectedAlbum, setSelectedAlbum] = useState([]);
   const [tracks, setTracks] = useState([]);
 
-  const API_URL = process.env.VITE_API_BASE_URL;
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
 
   const search = async(e) => {
 

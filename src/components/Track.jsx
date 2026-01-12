@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 function Track({track}) {
 
     const [popularity, setPopularity] = useState(0);
-    const API_URL = process.env.VITE_API_BASE_URL;
+    const API_URL = import.meta.env.VITE_API_BASE_URL;
 
     const getPopularity = async() => {
         const response = await fetch(
