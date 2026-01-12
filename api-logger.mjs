@@ -95,7 +95,10 @@ async function insertApiLog(logData) {
     logData.userAgent,
   ];
   
-  console.log(pool.connectionString);
+  console.log('CONNECTION_STRING from env:', process.env.CONNECTION_STRING);
+  console.log('CONNECTION_STRING is undefined?', process.env.CONNECTION_STRING === undefined);
+  console.log('CONNECTION_STRING type:', typeof process.env.CONNECTION_STRING);
+  
   await pool.query(query, values);
 }
 
