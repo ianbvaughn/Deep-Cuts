@@ -1,0 +1,12 @@
+spotify_dbt:
+  target: prod
+  outputs:
+    prod:
+      type: postgres
+      dbname: "{{ env_var('DBT_POSTGRES_DBNAME') }}"
+      schema: dbt
+      host: "{{ env_var('DBT_POSTGRES_HOST') }}"
+      password: "{{ env_var('DBT_POSTGRES_PASSWORD') }}"
+      port: 6543
+      threads: 1
+      user: "{{ env_var('DBT_POSTGRES_USER') }}"

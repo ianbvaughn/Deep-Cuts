@@ -1,0 +1,7 @@
+models:
+  - name: gold_api_logs_daily
+    description: "Aggregates API logs by day"
+    columns:
+      - name: created_day
+      - name: status
+      - name: num_calls
