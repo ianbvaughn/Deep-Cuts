@@ -1,10 +1,10 @@
-# Deep-Cuts
+# Deep Cuts
 
 A full-stack application that interfaces with the Spotify API to explore music data, featuring an Express.js backend with PostgreSQL logging, a React frontend, and dbt for data transformation.
 
 ## Overview
 
-Deep-Cuts provides a seamless way to search and explore Spotify's music catalog, including artists, albums, and tracks. The application automatically logs all API interactions to a PostgreSQL database for analytics and monitoring purposes.
+Deep Cuts provides a seamless way to search and explore Spotify's music catalog, including artists, albums, and tracks. The application automatically logs all API interactions to a PostgreSQL database for analytics and monitoring purposes.
 
 ## Features
 
