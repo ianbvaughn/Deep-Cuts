@@ -36,14 +36,14 @@ jobs:
       
       - name: Install dbt packages
         run: |
-          cd spotify_dbt
+          cd dbt/spotify_dbt
           dbt deps
         env:
           DBT_PROFILES_DIR: .
       
       - name: Run dbt models
         run: |
-          cd spotify_dbt
+          cd dbt/spotify_dbt
           dbt run --target prod
         env:
           DBT_PROFILES_DIR: .
@@ -55,7 +55,7 @@ jobs:
       
       - name: Run dbt tests
         run: |
-          cd spotify_dbt
+          cd dbt/spotify_dbt
           dbt test --target prod
         env:
           DBT_PROFILES_DIR: .
