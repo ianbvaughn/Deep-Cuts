@@ -3,10 +3,19 @@ spotify_dbt:
   outputs:
     prod:
       type: postgres
-      dbname: "{{ env_var('DBT_POSTGRES_DBNAME') }}"
+      dbname: "{{ env_var('DBT_POSTGRES_DBNAME', 'default') }}"
       schema: dbt
-      host: "{{ env_var('DBT_POSTGRES_HOST') }}"
-      password: "{{ env_var('DBT_POSTGRES_PASSWORD') }}"
+      host: "{{ env_var('DBT_POSTGRES_HOST', 'default') }}"
+      password: "{{ env_var('DBT_POSTGRES_PASSWORD', 'default') }}"
       port: 6543
       threads: 1
-      user: "{{ env_var('DBT_POSTGRES_USER') }}"
+      user: "{{ env_var('DBT_POSTGRES_USER', 'default') }}"
+    dev:
+      type: postgres
+      dbname: "{{ env_var('DBT_POSTGRES_DBNAME', 'default') }}"
+      schema: dbt_dev
+      host: "{{ env_var('DBT_POSTGRES_HOST', 'default') }}"
+      password: "{{ env_var('DBT_POSTGRES_PASSWORD', 'default') }}"
+      port: 6543
+      threads: 1
+      user: "{{ env_var('DBT_POSTGRES_USER', 'default') }}"
