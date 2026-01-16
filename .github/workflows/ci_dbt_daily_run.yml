@@ -1,21 +1,12 @@
-name: Prod Integration
+name: dbt Run
 
 on:
-  # Schedule the workflow to run daily at 6 AM UTC
+  # Runs twice a day, at 0600 and 1800.
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 6,18 * * *'
   
   # Allow manual triggering from GitHub UI
   workflow_dispatch:
-  
-  # Optional: Run on push to main branch
-  push:
-    branches:
-      - main
-  
-  pull_request:
-    branches:
-      - main
 
 jobs:
   dbt_run:
@@ -75,29 +66,3 @@ jobs:
         with:
           name: dbt-logs
           path: logs/
-
-  backend_integration:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-        
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.x'
-
-      - name: Install dependencies
-        run: |
-          cd backend
-          npm ci
-
-      - name: Run Jest tests
-        run: |
-          cd backend
-          npm test
-        env:
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
-          API_BASE_URL: ${{ secrets.API_BASE_URL }}
