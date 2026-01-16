@@ -103,21 +103,15 @@ cd frontend
 npm install
 ```
 
-4. Configure environment variables:
-Create a `.env` file in the backend directory with your Spotify API credentials:
-```
-SPOTIFY_CLIENT_ID=your_client_id
-SPOTIFY_CLIENT_SECRET=your_client_secret
-DATABASE_URL=postgresql://username:password@localhost:5432/deep_cuts
-```
+4. Spin up a local Postgres DB with the necessary database, schema and tables. You'll reference the database name in the next step (step #4). Currently, the only schema/table used in DDL is `BRONZE.BRONZE_API_LOGS`. You can reference the `backend/api-logger.mjs` file to determine the data type for each field. I'll work on getting this documented more clearly in the future.
 
-5. Set up the database:
-```bash
-# Create PostgreSQL database
-createdb deep_cuts
-
-# Run migrations (if applicable)
-npm run migrate
+5. Configure environment variables:
+Create a `.env` file in the `/backend` directory with your Spotify API credentials:
+```
+CLIENT_ID=<spotify_api_client_id>
+CLIENT_SECRET=<spotify_api_client_secret>
+CONNECTION_STRING=postgresql://<username>:<password>@localhost:<port>/<db_name>?sslmode=disable
+API_BASE_URL=http://localhost:10000
 ```
 
 ### Running the Application
@@ -131,10 +125,10 @@ npm start
 2. Start the frontend development server:
 ```bash
 cd frontend
-npm start
+npm run dev
 ```
 
-The application should now be running with the backend on `http://localhost:3001` (or your configured port) and the frontend on `http://localhost:3000`.
+The application should now be running with the backend on `http://localhost:10000` (or your configured port) and the frontend on `http://localhost:5173`.
 
 ## Data Logging
 
@@ -170,7 +164,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+4. Push to the branch (`git push -u origin feature/AmazingFeature`)
 5. Open a Pull Request
 
 ## License
@@ -185,5 +179,4 @@ This project is open source and available under the MIT License.
 ## Contact
 
 Ian Vaughn - [@ianbvaughn](https://github.com/ianbvaughn)
-
 Project Link: [https://github.com/ianbvaughn/Deep-Cuts](https://github.com/ianbvaughn/Deep-Cuts)
