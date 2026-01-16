@@ -1,4 +1,4 @@
-name: dbt Production Run
+name: Prod Integration
 
 on:
   # Schedule the workflow to run daily at 6 AM UTC
@@ -10,6 +10,10 @@ on:
   
   # Optional: Run on push to main branch
   push:
+    branches:
+      - main
+  
+  pull_request:
     branches:
       - main
 
@@ -71,3 +75,29 @@ jobs:
         with:
           name: dbt-logs
           path: logs/
+
+  backend_integration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm ci
+
+      - name: Run Jest tests
+        run: |
+          cd backend
+          npm test
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
