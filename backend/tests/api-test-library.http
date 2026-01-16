@@ -1,0 +1,21 @@
+# This test file is designed to work with the 'REST Client' VSCode extension developed by Huachao Mao. However, the endpoints will work regardless.
+
+@ARTIST_ID = 4Z8W4fKeB5YxbusRsdQVPb
+@ALBUM_ID = 2ix8vWvvSp2Yo7rKMiWpkg
+@TRACK_ID = 4mRSbPLnOm54ttkTYvxxSY
+
+### Request 1: Get artists by search string (top 15 by relevance)
+
+GET http://localhost:10000/spotify/artist/Radiohead HTTP/1.1
+
+### Request 2: Get all albums from artist
+
+GET http://localhost:10000/spotify/albums/{{ARTIST_ID}} HTTP/1.1
+
+### Request 3: Get all tracks in album
+
+GET http://localhost:10000/spotify/tracks/{{ALBUM_ID}} HTTP/1.1
+
+### Request 4: Get all data for track
+
+GET http://localhost:10000/spotify/track/{{TRACK_ID}} HTTP/1.1
