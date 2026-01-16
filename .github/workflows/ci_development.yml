@@ -70,9 +70,6 @@ jobs:
 
   backend_integration:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: 'backend'
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -82,6 +79,7 @@ jobs:
         with:
           node-version: '22.x'
           cache: 'npm'
+          cache-dependency-path: '/backend/package-lock.json'
 
       - name: Install dependencies
         run: |
