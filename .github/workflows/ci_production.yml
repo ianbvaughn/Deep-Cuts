@@ -1,13 +1,17 @@
-name: dbt Development Run
+name: Prod Integration
 
 on:
+  # Schedule the workflow to run daily at 6 AM UTC
+  schedule:
+    - cron: '0 6 * * *'
   
   # Allow manual triggering from GitHub UI
   workflow_dispatch:
   
+  # Optional: Run on push to main branch
   push:
     branches:
-      - feature/**
+      - main
 
 jobs:
   dbt_run:
@@ -40,7 +44,7 @@ jobs:
       - name: Run dbt models
         run: |
           cd dbt/spotify_dbt
-          dbt run --target dev
+          dbt run --target prod
         env:
           DBT_PROFILES_DIR: .
           DBT_POSTGRES_HOST: ${{ secrets.HOST }}
@@ -52,7 +56,7 @@ jobs:
       - name: Run dbt tests
         run: |
           cd dbt/spotify_dbt
-          dbt test --target dev
+          dbt test --target prod
         env:
           DBT_PROFILES_DIR: .
           DBT_POSTGRES_HOST: ${{ secrets.HOST }}

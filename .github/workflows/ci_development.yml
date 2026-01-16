@@ -1,17 +1,13 @@
-name: dbt Production Run
+name: Dev Integration
 
 on:
-  # Schedule the workflow to run daily at 6 AM UTC
-  schedule:
-    - cron: '0 6 * * *'
   
   # Allow manual triggering from GitHub UI
   workflow_dispatch:
   
-  # Optional: Run on push to main branch
   push:
     branches:
-      - main
+      - feature/**
 
 jobs:
   dbt_run:
@@ -44,7 +40,7 @@ jobs:
       - name: Run dbt models
         run: |
           cd dbt/spotify_dbt
-          dbt run --target prod
+          dbt run --target dev
         env:
           DBT_PROFILES_DIR: .
           DBT_POSTGRES_HOST: ${{ secrets.HOST }}
@@ -56,7 +52,7 @@ jobs:
       - name: Run dbt tests
         run: |
           cd dbt/spotify_dbt
-          dbt test --target prod
+          dbt test --target dev
         env:
           DBT_PROFILES_DIR: .
           DBT_POSTGRES_HOST: ${{ secrets.HOST }}
@@ -71,3 +67,25 @@ jobs:
         with:
           name: dbt-logs
           path: logs/
+
+  backend_integration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm ci
+
+      - name: Run Jest tests
+        run: |
+          cd backend
+          npm test
