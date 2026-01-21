@@ -47,4 +47,4 @@ temp/
 *.sqlite
 *.sqlite3
 *.db
-supabase/
+supabase/.temp
