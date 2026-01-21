@@ -82,6 +82,7 @@ Returns comprehensive data for a specific track.
 - PostgreSQL
 - Spotify Developer Account
 - npm or yarn
+- Container tool (Docker, OrbStack, etc.)
 
 ### Installation
 
@@ -103,7 +104,13 @@ cd frontend
 npm install
 ```
 
-4. Spin up a local Postgres DB with the necessary database, schema and tables. You'll reference the database name in the next step (step #4). Currently, the only schema/table used in DDL is `BRONZE.BRONZE_API_LOGS`. You can reference the `backend/api-logger.mjs` file to determine the data type for each field. I'll work on getting this documented more clearly in the future.
+4. Start local Supabase instance and pull latest schema changes
+```
+cd backend
+npx supabase start
+npx supabase db reset # To ensure that schema is up to date
+npx supabase migration new <name> # Write SQL in this file
+```
 
 5. Configure environment variables:
 Create a `.env` file in the `/backend` directory with your Spotify API credentials:

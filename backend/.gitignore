@@ -47,3 +47,4 @@ temp/
 *.sqlite
 *.sqlite3
 *.db
+supabase/.temp
