@@ -20,9 +20,8 @@ let header = '';
 app.listen(PORT, '0.0.0.0', async () => {
    token = await spotify.getToken(clientId, clientSecret);
    header = await spotify.getAuthHeader(token); 
-   console.log(`Token: ${token}`);
-   console.log(`Header: ${header}`);
-   console.log(`Token and header fetched. Server started on port ${PORT}.`);
+   console.log(`Info: Token`, token ? 'SET':'NOT SET');
+   console.log(`Info: Server listening on port ${PORT}`);
 });
 
 /**

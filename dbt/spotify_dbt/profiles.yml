@@ -16,6 +16,6 @@ spotify_dbt:
       schema: dbt_dev
       host: "{{ env_var('DBT_POSTGRES_HOST', 'default') }}"
       password: "{{ env_var('DBT_POSTGRES_PASSWORD', 'default') }}"
-      port: 6543
+      port: "{{ env_var('DBT_POSTGRES_PORT') | int }}"
       threads: 1
       user: "{{ env_var('DBT_POSTGRES_USER', 'default') }}"
