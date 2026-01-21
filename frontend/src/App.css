@@ -50,6 +50,10 @@
   color: var(--accent-green);
 }
 
+.popularityRect {
+  fill: var(--accent-green);
+}
+
 /* .children table tr, td, th{
   white-space: nowrap;
   overflow: hidden;
@@ -67,7 +71,7 @@
 }
 
 tbody tr:hover {
-  background-color: var(--gray-three);
+  background-color: var(--gray-four);
   cursor: pointer;
 }
 
