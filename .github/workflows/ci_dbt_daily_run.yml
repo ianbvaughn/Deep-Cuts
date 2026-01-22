@@ -59,6 +59,19 @@ jobs:
           DBT_POSTGRES_USER: ${{ secrets.USERNAME }}
           DBT_POSTGRES_PASSWORD: ${{ secrets.PASSWORD }}
           DBT_POSTGRES_DBNAME: ${{ secrets.DBNAME }}
+
+      - name: Generate dbt docs
+        run: |
+          cd dbt/spotify_dbt
+          dbt docs generate --static
+          mkdir docs-tmp
+          cp target/static_index.html docs-tmp/index.html
+      
+      - name: Publish dbt docs
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs-tmp
+          branch: main
       
       - name: Upload dbt logs
         if: always()  # Upload logs even if previous steps fail
