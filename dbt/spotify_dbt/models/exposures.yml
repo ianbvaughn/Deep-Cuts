@@ -1,0 +1,20 @@
+exposures:
+
+  - name: api_health_check
+    label: API Performance Dashboard
+    config:
+      tags: bi
+    type: dashboard
+    maturity: high
+    url: https://public.tableau.com/app/profile/ian.vaughn/viz/DeepCuts-APIHealthMonitoringDemo/Dashboard1
+    description: >
+      Provides insight into API performance metrics.
+
+    depends_on:
+      - source('bronze', 'bronze_api_logs')
+      - ref('silver_api_logs')
+      - ref('gold_api_logs_daily')
+
+    owner:
+      name: Ian Vaughn
+      email: ianbvaughn@gmail.com

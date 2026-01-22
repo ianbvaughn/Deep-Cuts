@@ -1,8 +1,16 @@
 models:
   - name: gold_api_logs_daily
-    description: "Aggregates API logs by day"
+    description: '{{ doc("gold_api_logs_daily") }}'
+    config:
+      tags: transformed
     columns:
       - name: created_day
+        description: Calendar day
+        constraints:
+          - type: unique
       - name: status
-      - name: num_calls
+        description: Status inherited from upstream
+      - name: count
+        description: Number of API calls for given aggregation
       - name: avg_response_time
+        description: Average response time for given aggregation
