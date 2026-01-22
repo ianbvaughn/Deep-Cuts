@@ -71,7 +71,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: docs-tmp
-          branch: main
+          branch: gh-pages
       
       - name: Upload dbt logs
         if: always()  # Upload logs even if previous steps fail
