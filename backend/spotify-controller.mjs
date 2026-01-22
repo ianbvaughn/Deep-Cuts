@@ -5,6 +5,7 @@ import { apiLogger } from './api-logger.mjs';
 import * as spotify from './spotify-model.mjs';
 
 const app = express();
+app.set('trust proxy', true)
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cors());

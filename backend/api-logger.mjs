@@ -1,7 +1,10 @@
 import { response } from "express";
 import { pool } from "./pg-db.mjs";
+import { readFile, writeFile, writeFileSync } from 'node:fs';
+import { type } from "node:os";
 
 const apiLogger = async (req, res, next) => {
+
    const startTime = Date.now();
 
    const requestBody = req.body ? JSON.stringify(req.body) : null;
@@ -33,7 +36,7 @@ const apiLogger = async (req, res, next) => {
       
       // Get IP address (handle proxies)
       const ipAddress = req.ip || 
-                        req.headers['x-forwarded-for']?.split(',')[0] || 
+                        req.ips[0] || 
                         req.connection.remoteAddress ||
                         req.socket.remoteAddress;
       
