@@ -80,7 +80,7 @@ jobs:
       - name: Publish dbt docs
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: docs-tmp
+          folder: dbt/spotify_dbt/docs-tmp
           branch: gh-pages
       
       - name: Upload dbt logs
