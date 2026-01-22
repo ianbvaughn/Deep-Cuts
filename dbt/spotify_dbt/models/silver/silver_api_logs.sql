@@ -12,6 +12,6 @@ select
    user_agent,
    ingested_at
 from
-   {{ source('bronze_tables', 'bronze_api_logs') }}
+   {{ source('bronze', 'bronze_api_logs') }}
 where
    response_body is not null

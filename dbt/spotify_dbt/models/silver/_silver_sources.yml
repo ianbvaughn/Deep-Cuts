@@ -1,8 +1,40 @@
 sources:
-  - name: bronze_tables
+  - name: bronze
+    description: '{{ doc("bronze") }}'
     schema: bronze
+    config:
+      tags: raw
     tables:
       - name: bronze_api_logs
+        description: '{{ doc("bronze_api_logs") }}'
+        columns:
+          - name: log_id
+            description: Uniquely identifies an API call
+            constraints:
+              - name: Unique
+                type: unique
+          - name: timestamp
+            description: When the API call was made
+          - name: user_id
+            description: Uniquely identifies the user making the API call
+          - name: endpoint
+            description: Identifies the API endpoint being called
+          - name: http_method
+            description: Identifies the HTTP method used
+          - name: status_code
+            description: Identifies the status code of the request
+          - name: response_time_ms
+            description: How long the API call took to complete
+          - name: request_body
+            description: Request body in JSON format
+          - name: response_body
+            description: Response body in JSON format
+          - name: ip_address
+            description: IP address of the client making the API call
+          - name: user_agent
+            description: Identifies client browser information
+          - name: ingested_at
+            description: When the record was ingested into DB
         config:
           freshness:
             warn_after: {count: 24, period: hour}
