@@ -66,6 +66,13 @@ jobs:
           dbt docs generate --static
           mkdir docs-tmp
           cp target/static_index.html docs-tmp/index.html
+        env:
+          DBT_PROFILES_DIR: .
+          DBT_POSTGRES_HOST: ${{ secrets.HOST }}
+          DBT_POSTGRES_PORT: ${{ secrets.PORT }}
+          DBT_POSTGRES_USER: ${{ secrets.USERNAME }}
+          DBT_POSTGRES_PASSWORD: ${{ secrets.PASSWORD }}
+          DBT_POSTGRES_DBNAME: ${{ secrets.DBNAME }}
       
       - name: Publish dbt docs
         uses: JamesIves/github-pages-deploy-action@v4
