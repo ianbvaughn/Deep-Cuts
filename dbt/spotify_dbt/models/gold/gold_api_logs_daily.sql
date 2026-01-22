@@ -1,7 +1,8 @@
 select
    date_trunc('day', timestamp)::date as created_day,
    status,
-   count(*)
+   count(*),
+   round(avg(response_time_ms),2) as avg_response_time
 from
    {{ ref('silver_api_logs') }}
 group by

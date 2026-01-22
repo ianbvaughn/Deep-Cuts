@@ -5,3 +5,4 @@ models:
       - name: created_day
       - name: status
       - name: num_calls
+      - name: avg_response_time
