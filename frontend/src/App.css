@@ -25,29 +25,128 @@
   filter: drop-shadow(0 0 2em var(--accent-green));
 }
 
-/*  */
+/* bodyContainer: Runs flexbox for all content on body. */
+
+.bodyContainer {
+  display: flex;
+  flex-direction: row;
+  width: 90vw;
+  height: 90vh;
+  margin: 0 auto;
+  /* border: 1px solid #fff; */
+}
+
+.bodyContainer * {
+  animation: fadeIn 0.5s ease;
+}
+
+.bodyChildLeft {
+  display: grid;
+  flex-grow: 1;
+  /* border: 1px solid blue; */
+}
+
+/* gridItems: Runs the grid for the left panel */
+
+.grid-item.item-1 {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid pink; */
+  flex-grow: 1;
+  place-items: center;
+  justify-content: center;
+  align-items: center;
+  /* animation: fadeIn 0.5s ease; */
+}
+
+.grid-item.item-1 p {
+  margin: 0;
+  margin-bottom: 14px;
+}
+
+.grid-item.item-1 h1 {
+  margin: 0;
+}
+
+.grid-item.item-1 input {
+  width: 400px;
+  font-size: 1.1em;
+  color: var(--accent-green);
+  background-color: var(--gray-three);
+  text-align: center !important;
+  box-sizing: border-box; /* includes padding/border in width calculation */
+}
+
+.grid-item.item-2 {
+  display: flex;
+  flex-direction: column;
+  grid-row: span 7;
+  place-items: center;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.infoHeader {
+  display: flex;
+  flex-direction: row;
+  place-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.infoHeader img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover; /* crops to fill the space */
+  object-position: center; /* keeps the center visible (default) */
+  border-radius: 50%; /* makes it circular */
+  border: 3px solid var(--accent-green); /* add border - adjust color/width as needed */
+}
+
+.infoHeader.album img {
+  border: 3px solid pink;
+}
+
+/* bodyChildRight: Holds the table with Spotify information. */
+
+.bodyChildRight {
+  flex-grow: 5;
+  /* animation: fadeIn 0.7s ease; */
+}
 
 .container {
   display: flex;
   flex-direction: column;
-  width: 90vw;
-  height: 600px;
+  height: 100%;
   margin: 0 auto;
   overflow: auto;
-  /* border: 1px solid black; */
+  /* border: 1px solid orange; */
 }
 
 .children {
+  /* border: 1px solid #fff; */
   flex-grow: 1;
 }
 
 .children table {
   width: 100%;
+  height: 100%;
+}
+
+.children table * {
+  /* border: 1px solid orange; */
+  height: 15px;
 }
 
 .children thead {
   background-color: var(--gray-one);
   color: var(--accent-green);
+}
+
+tbody tr:hover {
+  background-color: var(--gray-four);
+  cursor: pointer;
 }
 
 .popularityRect {
@@ -70,17 +169,23 @@
   margin: 10px;
 }
 
-tbody tr:hover {
-  background-color: var(--gray-four);
-  cursor: pointer;
-}
-
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

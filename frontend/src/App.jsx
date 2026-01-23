@@ -81,47 +81,60 @@ function App() {
 
   return (
     <>
-      <h1>Deep Cuts</h1>
-      <form>
-        <p>
-        <input
-          name="name"
-          placeholder="Enter an artist name:"
-          onChange={e => setArtistName(e.target.value)}>
-        </input>
-        </p>
-        <p>
-        <button
-          type="submit"
-          onClick = {search}>
-        Search</button>
-        </p>
-        {<ArtistHeader className="infoHeader" artist={selectedArtist}/>}
-        {<AlbumHeader className="infoHeader" album={selectedAlbum}/>}
-        <div class="container">
-          
-          {artist.length > 0 && 
-          selectedArtist.length < 1 && 
-          <>
-          <p>Select an Artist</p>
-          <div class="children">
-            <ArtistCollection artists={artist} setSelectedArtist={setSelectedArtist}/>
+      <div className="bodyContainer">
+        <div className="bodyChildLeft">
+          <div className="grid-item item-1">
+            <h1>Deep Cuts</h1>
+            <p>find the next banger</p>
+            <form>
+              <p>
+              <input
+                name="name"
+                placeholder="Enter an artist name:"
+                onChange={e => setArtistName(e.target.value)}>
+              </input>
+              </p>
+              <p>
+              <button
+                type="submit"
+                onClick = {search}>
+              Search</button>
+              </p>
+            </form>
           </div>
-          </>}
-          
-          {albums.length > 0 && 
-          selectedAlbum.length < 1 && 
-          <>
-          <p>Select an Album</p>
-          <div class="children">
-            <AlbumCollection albums={albums} setSelectedAlbum={setSelectedAlbum}/>
-          </div>
-          </>}
-          {tracks.length > 0 && <div class="children">
-            <TrackCollection tracks={tracks}/>
+          {artist.length > 0 && <div className="grid-item item-2">
+            {<ArtistHeader className="infoHeader" artist={selectedArtist}/>}
+            {<AlbumHeader className="infoHeader" album={selectedAlbum}/>}
           </div>}
         </div>
-      </form>
+
+        {artist.length > 0 && <div className="bodyChildRight">
+          <div class="container">
+            
+            {artist.length > 0 && 
+            selectedArtist.length < 1 && 
+            <>
+            <p>Select an Artist</p>
+            <div class="children">
+              <ArtistCollection artists={artist} setSelectedArtist={setSelectedArtist}/>
+            </div>
+            </>}
+            
+            {albums.length > 0 && 
+            selectedAlbum.length < 1 && 
+            <>
+            <p>Select an Album</p>
+            <div class="children">
+              <AlbumCollection albums={albums} setSelectedAlbum={setSelectedAlbum}/>
+            </div>
+            </>}
+            {tracks.length > 0 && <div class="children">
+              <TrackCollection tracks={tracks}/>
+            </div>}
+          </div>
+        </div>}
+
+      </div>
     </>
   )
 }
