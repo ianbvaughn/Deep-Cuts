@@ -147,17 +147,9 @@ jobs:
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-            # 1. Navigate to your project folder
             cd Deep-Cuts
-            
-            # 2. Pull the latest code
             git pull origin main
-            
-            # 3. Install dependencies
+            cd backend
             npm install --production
-            
-            # 4. Restart the app with updated environment
             pm2 restart ecosystem.config.js --update-env
-            
-            # 5. Save the PM2 state
             pm2 save
