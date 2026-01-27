@@ -129,3 +129,31 @@ jobs:
           version: latest
       - run: supabase link --project-ref $SUPABASE_PROJECT_ID
       - run: supabase db push
+
+  push_to_backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # 1. Navigate to your project folder
+            cd Deep-Cuts
+            
+            # 2. Pull the latest code
+            git pull origin main
+            
+            # 3. Install dependencies
+            npm install --production
+            
+            # 4. Restart the app with updated environment
+            pm2 restart ecosystem.config.js --update-env
+            
+            # 5. Save the PM2 state
+            pm2 save

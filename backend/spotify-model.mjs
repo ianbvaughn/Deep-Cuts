@@ -21,7 +21,7 @@ async function getToken(clientId, clientSecret) {
   });
 
   const jsonResult = await response.json();
-  return jsonResult.access_token;
+  return [jsonResult.access_token, jsonResult.expires_in];
 }
 
 function getAuthHeader(token) {
