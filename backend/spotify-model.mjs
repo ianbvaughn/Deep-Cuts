@@ -1,3 +1,5 @@
+// TODO: Refactor getToken() to implement token fetch for both global and user tokens
+
 async function getToken(clientId, clientSecret) {
   
   const authString = clientId + ':' + clientSecret;
