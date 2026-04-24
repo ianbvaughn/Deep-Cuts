@@ -1,5 +1,5 @@
 import { response } from "express";
-import { pool } from "./pg-db.mjs";
+import { pool } from "./config/database.mjs";
 import { readFile, writeFile, writeFileSync } from 'node:fs';
 import { type } from "node:os";
 
@@ -98,9 +98,9 @@ async function insertApiLog(logData) {
     logData.userAgent,
   ];
   
-  console.log('CONNECTION_STRING from env:', process.env.CONNECTION_STRING);
-  console.log('CONNECTION_STRING is undefined?', process.env.CONNECTION_STRING === undefined);
-  console.log('CONNECTION_STRING type:', typeof process.env.CONNECTION_STRING);
+  // console.log('CONNECTION_STRING from env:', process.env.CONNECTION_STRING);
+  // console.log('CONNECTION_STRING is undefined?', process.env.CONNECTION_STRING === undefined);
+  // console.log('CONNECTION_STRING type:', typeof process.env.CONNECTION_STRING);
   
   await pool.query(query, values);
 }

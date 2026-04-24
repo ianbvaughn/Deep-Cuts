@@ -4,7 +4,7 @@ import PopularityBar from "./PopularityBar";
 function Track({track}) {
 
     const [popularity, setPopularity] = useState(0);
-    const API_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:10000";
+    const API_URL = 'http://127.0.0.1:5173';
 
     const getPopularity = async() => {
         const response = await fetch(

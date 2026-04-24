@@ -13,6 +13,4 @@ const pool = new Pool({
 
 console.log('Info: Pool created successfully');
 
-export const query = (text, values) => pool.query(text, values);
-export const getClient = () => pool.connect();
 export { pool };
