@@ -73,7 +73,7 @@ function App() {
 
   const getToken = async(e) => {
     e.preventDefault();
-    window.location.href = `http://127.0.0.1:5173/spotify/auth/login`;
+    window.location.href = `${API_URL}/spotify/auth/login`;
   };
 
   useEffect(() => {
