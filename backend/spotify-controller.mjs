@@ -112,9 +112,6 @@ app.get('/spotify/auth/callback', async(req,res) => {
 
       // TODO: Move this functionality to the 'SpotifyService.mjs/getToken()' function
 
-      console.log('Query params:', req.query);
-      console.log('Code:', req.query.code);
-
       const code = req.query.code;
 
       const params = new URLSearchParams({
@@ -136,25 +133,15 @@ app.get('/spotify/auth/callback', async(req,res) => {
 
       let data = await response.json();
 
-      console.log('Spotify token response:', data);
-
       if (response.ok) {
             token = new Token(data);
             req.session.token = token;
-            console.log('CALLBACK - Session ID: ', req.sessionID)
-            console.log('CALLBACK - Saved token to session: ', req.session.token)
             req.session.save((err) => {
                   if (err) {
                         console.error('Session save error:', err);
                         return res.status(500).send('Session save failed');
                   }
 
-                  console.log('Session saved, redirecting...');
-                  console.log('Session ID after save:', req.sessionID);
-
-                  const domain = process.env.COOKIE_DOMAIN || '127.0.0.1';
-                  res.setHeader('Set-Cookie', `spotify.sid=${req.sessionID}; Path=/; Domain=${domain}; Max-Age=86400; SameSite=Lax${process.env.NODE_ENV === 'production' ? '; Secure' : ''}`);
-                  console.log('Set-Cookie header:', res.getHeader('Set-Cookie'));
                   res.redirect(process.env.FRONTEND_URL || 'http://127.0.0.1:5173');
             });
             // TODO: Persist user tokens in db
@@ -165,11 +152,6 @@ app.get('/spotify/auth/callback', async(req,res) => {
 });
 
 app.get('/spotify/api/token', (req,res) => {
-
-      console.log('API - Session ID: ', req.sessionID);
-      console.log('API - Session data: ', req.session);
-      console.log('API - Does Token Exist?: ', !!req.session.token);
-      console.log('Cookie header: ', req.headers.cookie)
 
       if (req.session.token) {
             res.json(req.session.token);
