@@ -8,7 +8,7 @@ import {SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, API_BASE_URL} from './config/s
 import { Token } from './models/Token.mjs'
 
 const app = express();
-// app.set('trust proxy', true)
+app.set('trust proxy', true)
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cors({
