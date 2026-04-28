@@ -30,7 +30,8 @@ function App() {
 
     const response = await fetch(
       `${API_URL}/spotify/artist/${artistName}`,
-      {
+        {
+          credentials: 'include',
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
       }
@@ -48,6 +49,7 @@ function App() {
     const response = await fetch(
       `${API_URL}/spotify/albums/${selectedArtist.id}`,
       {
+        credentials: 'include',
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
       }
@@ -62,6 +64,7 @@ function App() {
     const response = await fetch(
       `${API_URL}/spotify/tracks/${selectedAlbum.id}`,
       {
+        credentials: 'include',
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
       }
