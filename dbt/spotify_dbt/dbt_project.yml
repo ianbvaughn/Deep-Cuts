@@ -33,6 +33,7 @@ models:
   spotify_dbt:
     # Config indicated by + and applies to all files under models/example/
     +materialized: table
+    +dbt-osmosis: "_{model}.yml"
     silver:
       +schema: silver
     gold:
