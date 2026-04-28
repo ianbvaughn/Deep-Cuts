@@ -51,6 +51,7 @@ app.listen(PORT, '0.0.0.0', async () => {
 
 app.get('/spotify/artist/:name', async(req,res) => {
       const name = req.params.name;
+      console.log('Session Token: ', req.session.token)
       const artist = await spotify.searchForArtist(req.session.token, name);
       res.type('application/json').send(artist);
 });
