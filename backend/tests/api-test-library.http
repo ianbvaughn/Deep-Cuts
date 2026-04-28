@@ -19,3 +19,6 @@ GET http://localhost:10000/spotify/tracks/{{ALBUM_ID}} HTTP/1.1
 ### Request 4: Get all data for track
 
 GET http://localhost:10000/spotify/track/{{TRACK_ID}} HTTP/1.1
+
+### Request 5: Authorization
+GET http://localhost:10000/spotify/auth/login HTTP/1.1

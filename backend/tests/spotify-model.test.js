@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { getAlbumsByArtist, getAuthHeader, getToken, getTrackInfo, getTracksByAlbum, searchForArtist } from './spotify-model.mjs'
+import { getAlbumsByArtist, getAuthHeader, getToken, getTrackInfo, getTracksByAlbum, searchForArtist } from '../services/SpotifyService.mjs'
 
 test('Retrieve token', async () => {
    const token = await getToken(process.env.CLIENT_ID, process.env.CLIENT_SECRET);

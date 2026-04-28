@@ -1,8 +1,9 @@
 function ArtistHeader({artist}) {
 
     return (
-        <div className="hasBorder">
-         <h1>{artist.name}</h1>
+        <div className="infoHeader">
+         {artist?.images?.[0]?.url && <img src={artist.images[0].url}></img>}
+         <h2>{artist.name}</h2>
         </div>
     );
 }

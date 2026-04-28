@@ -8,6 +8,7 @@ import AlbumHeader from './components/AlbumHeader'
 
 function App() {
 
+  const [token, setToken] = useState(null);
   const [artistName, setArtistName] = useState('');
   const [artist, setArtist] = useState([]);
   const [selectedArtist, setSelectedArtist] = useState([]);
@@ -15,7 +16,9 @@ function App() {
   const [selectedAlbum, setSelectedAlbum] = useState([]);
   const [tracks, setTracks] = useState([]);
 
-  const API_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:10000";
+  const API_URL = import.meta.env.VITE_API_BASE_URL || '';
+
+  // const API_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:10000";
 
   const search = async(e) => {
 
@@ -24,9 +27,11 @@ function App() {
     setSelectedAlbum([]);
     setAlbums([]);
     setTracks([]);
+
     const response = await fetch(
       `${API_URL}/spotify/artist/${artistName}`,
-      {
+        {
+          credentials: 'include',
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
       }
@@ -44,6 +49,7 @@ function App() {
     const response = await fetch(
       `${API_URL}/spotify/albums/${selectedArtist.id}`,
       {
+        credentials: 'include',
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
       }
@@ -58,6 +64,7 @@ function App() {
     const response = await fetch(
       `${API_URL}/spotify/tracks/${selectedAlbum.id}`,
       {
+        credentials: 'include',
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
       }
@@ -67,61 +74,91 @@ function App() {
     setTracks(data);
   }
 
-  // useEffect( () => {
-  //   getToken();
-  // });
+  const getToken = async(e) => {
+    e.preventDefault();
+    window.location.href = `${API_URL}/spotify/auth/login`;
+  };
 
-  useEffect( () => {
-    getAlbums();
+  useEffect(() => {
+    fetch(`${API_URL}/spotify/api/token`, {
+      credentials: 'include'
+    })
+        .then(res => res.ok ? res.json() : null)
+        .then(data => setToken(data))
+        .catch(() => setToken(null));
+  }, []);
+
+  useEffect(() => {
+    if (selectedArtist?.id) getAlbums();
   }, [selectedArtist]);
 
-  useEffect( () => {
-    getTracks();
+  useEffect(() => {
+    if (selectedAlbum?.id) getTracks();
   }, [selectedAlbum]);
 
   return (
     <>
-      <h1>Deep Cuts</h1>
-      <form>
-        <p>
-        <input
-          name="name"
-          placeholder="Enter an artist name:"
-          onChange={e => setArtistName(e.target.value)}>
-        </input>
-        </p>
-        <p>
-        <button
-          type="submit"
-          onClick = {search}>
-        Search</button>
-        </p>
-        {<ArtistHeader className="infoHeader" artist={selectedArtist}/>}
-        {<AlbumHeader className="infoHeader" album={selectedAlbum}/>}
-        <div class="container">
-          
-          {artist.length > 0 && 
-          selectedArtist.length < 1 && 
-          <>
-          <p>Select an Artist</p>
-          <div class="children">
-            <ArtistCollection artists={artist} setSelectedArtist={setSelectedArtist}/>
+      <div className="bodyContainer">
+        <div className="bodyChildLeft">
+          <div className="grid-item item-1">
+            <h1>Deep Cuts</h1>
+            <p>find the next banger</p>
+            {token &&
+            <form>
+              <p>
+              <input
+                name="name"
+                placeholder="Enter an artist name:"
+                onChange={e => setArtistName(e.target.value)}>
+              </input>
+              </p>
+              <p>
+              <button
+                type="submit"
+                onClick = {search}>
+              Search</button>
+              </p>
+            </form> }
+            {!token &&
+                <button
+                    type="button"
+                    onClick = {getToken}>
+                  Login to Spotify</button>
+            }
           </div>
-          </>}
-          
-          {albums.length > 0 && 
-          selectedAlbum.length < 1 && 
-          <>
-          <p>Select an Album</p>
-          <div class="children">
-            <AlbumCollection albums={albums} setSelectedAlbum={setSelectedAlbum}/>
-          </div>
-          </>}
-          {tracks.length > 0 && <div class="children">
-            <TrackCollection tracks={tracks}/>
+          {artist.length > 0 && <div className="grid-item item-2">
+            {<ArtistHeader className="infoHeader" artist={selectedArtist}/>}
+            {<AlbumHeader className="infoHeader" album={selectedAlbum}/>}
           </div>}
         </div>
-      </form>
+
+        {artist.length > 0 && <div className="bodyChildRight">
+          <div className="container">
+            
+            {artist.length > 0 && 
+            selectedArtist.length < 1 && 
+            <>
+            <p>Select an Artist</p>
+            <div className="children">
+              <ArtistCollection artists={artist} setSelectedArtist={setSelectedArtist}/>
+            </div>
+            </>}
+            
+            {albums.length > 0 && 
+            selectedAlbum.length < 1 && 
+            <>
+            <p>Select an Album</p>
+            <div className="children">
+              <AlbumCollection albums={albums} setSelectedAlbum={setSelectedAlbum}/>
+            </div>
+            </>}
+            {tracks.length > 0 && <div className="children">
+              <TrackCollection tracks={tracks}/>
+            </div>}
+          </div>
+        </div>}
+
+      </div>
     </>
   )
 }
