@@ -60,7 +60,11 @@ export class Token {
             if (response.ok) {
                 const data = await response.json();
                 this._token = data.access_token;
-                this._refreshToken = data.refresh_token;
+                this._refreshToken = data.refresh_token || this._refreshToken;
+                // Per Spotify documentation: "Depending on the grant used to get the initial refresh token, a refresh
+                // token might not be included in each response. When a refresh token is not returned, continue using
+                // the existing token." Per these instructions, we will fall back on the original refresh token when
+                // one is not provided.
             } else {
                 console.log('Token refresh failed');
             }
