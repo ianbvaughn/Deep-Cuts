@@ -65,6 +65,7 @@ export class Token {
                 // token might not be included in each response. When a refresh token is not returned, continue using
                 // the existing token." Per these instructions, we will fall back on the original refresh token when
                 // one is not provided.
+                this._generateHeader();
             } else {
                 console.log('Token refresh failed');
             }
