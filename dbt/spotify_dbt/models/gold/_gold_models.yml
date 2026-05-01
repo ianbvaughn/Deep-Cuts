@@ -14,3 +14,11 @@ models:
         description: Number of API calls for given aggregation
       - name: avg_response_time
         description: Average response time for given aggregation
+  - name: gold_unique_ips
+    description: '{{ doc("gold_unique_ips") }}'
+    config:
+      tags: transformed
+    columns:
+      - name: ip_address
+      - name: first_seen_ts
+        description: When the public IP made its first request to the server
